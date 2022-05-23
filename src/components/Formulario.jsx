@@ -1,13 +1,10 @@
-import {Fragment, useContext} from 'react'
+import {Fragment} from 'react'
 import { MARCAS, YEARS, PLANES } from '../constants'
-import CotizadorContext from '../context/CotizadorProvider'
+import useCotizador from '../hooks/useCotizador'
 
 const Formulario = () => {
 
-
-  const {hola} = useContext(CotizadorContext)
-  console.log(hola)
-
+  const { handleChangeDatos, datos } = useCotizador()
 
   return (
     <>
@@ -19,6 +16,8 @@ const Formulario = () => {
           <select
             name="marca"
             className="w-full p-3 bg-white border border-gray-200"
+            onChange={(e) => handleChangeDatos(e)}
+            value={datos.marca}
           >
             <option>-- Selecciona Marca --</option>
             {MARCAS.map((marca) => (
@@ -33,8 +32,10 @@ const Formulario = () => {
             Año
           </label>
           <select
-            name="marca"
+            name="year"
             className="w-full p-3 bg-white border border-gray-200"
+            onChange={(e) => handleChangeDatos(e)}
+            value={datos.year}
           >
             <option>-- Selecciona Año --</option>
             {YEARS.map((year) => (
@@ -49,22 +50,20 @@ const Formulario = () => {
             Elige un Plan
           </label>
           <div className="flex gap-3 items-center">
-            {PLANES.map(plan => (
+            {PLANES.map((plan) => (
               <Fragment key={plan.id}>
-                <label>
-                  {plan.nombre}
-                </label>
-                <input 
+                <label>{plan.nombre}</label>
+                <input
                   type="radio"
                   name="plan"
                   value={plan.id}
+                  onChange={(e) => handleChangeDatos(e)}
                 />
               </Fragment>
             ))}
-
           </div>
         </div>
-        <input 
+        <input
           type="submit"
           className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors 
           text-white cursor-pointer p-3 uppercase font-bold"
