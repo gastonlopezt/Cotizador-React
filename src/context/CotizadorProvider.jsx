@@ -37,8 +37,7 @@ const CotizadorProvider = ({children}) => {
 
     //Obtener dif de años
     const diferencia = obtenerDiferenciaYear(datos.year)
-    console.log(diferencia)
-
+    
     //Hay que restar el 3% cada año
     resultado -= ((diferencia * 3) * resultado) / 100
 
@@ -53,6 +52,7 @@ const CotizadorProvider = ({children}) => {
     //Formatear
     resultado = formatearDinero(resultado)
     setResultado(resultado)
+    console.log(resultado)
   }
 
   return (
@@ -62,7 +62,8 @@ const CotizadorProvider = ({children}) => {
         handleChangeDatos,
         error,
         setError,
-        cotizarSeguro
+        cotizarSeguro,
+        resultado
       }}
     >
       {children}
